@@ -79,6 +79,7 @@ def no_name(name):
 
 @app.route('/', methods=['GET'])
 def query_records():
+    # request.args.get 用于获得get请求url中的参数
     name = request.args.get('name')
     record = db.search_one('name', name)
     if record:
@@ -89,6 +90,7 @@ def query_records():
 
 @app.route('/', methods=['PUT'])
 def create_records():
+    # request.data 是请求体中的数据
     record = json.loads(request.data)
     db.add_one(record)
     return jsonify(record)
